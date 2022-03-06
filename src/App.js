@@ -1,5 +1,5 @@
 import { Box } from "@mui/material";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Header from "./Header";
 import PokemonListPage from "./PokemonListPage";
 import PokemonDetailsPage from "./PokemonDetailsPage";
@@ -20,6 +20,7 @@ function App() {
         <Header lang={lang} setLang={setLang} />
         <LangContext.Provider value={lang}>
           <Routes>
+            <Route path="/" element={<Navigate to="/pokemons" />} />
             <Route path="/pokemons" element={<PokemonListPage />}>
               <Route
                 path="/pokemons/:pokemonId"
