@@ -1,6 +1,5 @@
 import styled from "@emotion/styled";
 import { Card, Typography } from "@mui/material";
-import React from "react";
 import PokemonType from "../../common/PokemonType";
 
 const Pokemon = styled(Card)({
@@ -24,16 +23,16 @@ const Pokemon = styled(Card)({
 });
 
 export default function PokemonCard({ pokemon }) {
-  const { id, names, image, types } = pokemon;
+  const { id, name, image, types } = pokemon;
   return (
     <Pokemon>
       <Typography variant="body2" gutterBottom className="num">
         No.{id}
       </Typography>
       <Typography variant="h4" component={"h3"} className="title">
-        {names["fr"]}
+        {name}
       </Typography>
-      <img src={image} alt={names["fr"]} />
+      <img src={image} alt={name} />
       <div className="types">
         {types.map((type) => (
           <PokemonType key={type} type={type} />

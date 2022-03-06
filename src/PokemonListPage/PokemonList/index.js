@@ -1,22 +1,37 @@
+import styled from "@emotion/styled";
 import { Grid } from "@mui/material";
-import React from "react";
+import { Link } from "react-router-dom";
 import usePokemons from "../../common/hooks/usePokemons";
 import PokemonCard from "../PokemonCard";
+import { useContext } from "react";
+import { LangContext } from "../../App";
 
-export default function PokemonList() {
+const LinkSimple = styled(Link)({
+  textDecoration: "none",
+});
+
+export default function PokemonList({ search }) {
+  const lang = useContext(LangContext);
   const pokemons = usePokemons();
-  console.log(pokemons);
+  const filtered = pokemons.filter(({ names }) =>
+    names[lang].toLowerCase().includes(search.toLowerCase())
+  );
   return (
     <Grid
       container
       spacing={{ xs: 1 }}
       columns={{ xs: 1, sm: 2, md: 4, lg: 6, xl: 8 }}
     >
-      {pokemons.map((pokemon) => (
-        <Grid item xs={1}>
-          <PokemonCard pokemon={pokemon} />
-        </Grid>
-      ))}
+      {filtered.map(({ id, names, image, types }) => {
+        const name = names[lang];
+        return (
+          <Grid key={id} item xs={1}>
+            <LinkSimple to={`${id}`}>
+              <PokemonCard pokemon={{ id, name, image, types }} />
+            </LinkSimple>
+          </Grid>
+        );
+      })}
     </Grid>
   );
 }
