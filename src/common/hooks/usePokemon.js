@@ -7,9 +7,7 @@ export default function usePokemon() {
   useEffect(() => {
     const fetchPokemon = async () => {
       try {
-        const response = await fetch(
-          "https://pokedex-jgabriele.vercel.app/pokemons.json"
-        );
+        const response = await fetch("/pokemons.json");
         const pokemons = await response.json();
         const selectedPokemon = await pokemons.filter(
           ({ id }) => id === parseInt(pokemonId)

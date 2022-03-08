@@ -5,9 +5,7 @@ export default function usePokemons() {
   useEffect(() => {
     const fetchPokemons = async () => {
       try {
-        const response = await fetch(
-          "https://pokedex-jgabriele.vercel.app/pokemons.json"
-        );
+        const response = await fetch("/pokemons.json");
         const pokemonsJson = await response.json();
         setPokemons(pokemonsJson);
       } catch (e) {

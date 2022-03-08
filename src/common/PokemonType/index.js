@@ -1,5 +1,8 @@
 import styled from "@emotion/styled";
+import useType from "../hooks/useTypes";
 import TYPES from "./TYPES";
+import { useContext } from "react";
+import { LangContext } from "../../App";
 
 const Type = styled("div")(({ type }) => ({
   width: "fit-content",
@@ -12,5 +15,7 @@ const Type = styled("div")(({ type }) => ({
 }));
 
 export default function PokemonType({ type }) {
-  return <Type type={type}>{type}</Type>;
+  const lang = useContext(LangContext);
+  const trad = useType(type, lang);
+  return <Type type={type}>{trad}</Type>;
 }
